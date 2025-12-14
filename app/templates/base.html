@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}电商平台{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('main.index') }}">首页</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('main.cart') }}">购物车</a>
+            <a href="{{ url_for('main.orders') }}">我的订单</a>
+            {% if current_user.is_admin %}
+                <a href="{{ url_for('admin.dashboard') }}">管理后台</a>
+            {% endif %}
+            <a href="{{ url_for('auth.logout') }}">退出</a>
+            <span>欢迎, {{ current_user.username }}</span>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}">登录</a>
+            <a href="{{ url_for('auth.register') }}">注册</a>
+        {% endif %}
+    </nav>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

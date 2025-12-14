@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>我的订单</h1>
+{% for order in orders %}
+<div class="order">
+    <h3>订单 #{{ order.id }}</h3>
+    <p>状态: {{ order.status }}</p>
+    <p>总计: ¥{{ order.total }}</p>
+    <p>时间: {{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    <ul>
+        {% for item in order.items %}
+        <li>{{ item.product.name }} x {{ item.quantity }} - ¥{{ item.price }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}
