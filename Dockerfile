@@ -10,7 +10,6 @@ COPY run.py .
 COPY reset_database.py .
 COPY docker-init.py .
 COPY add-sample-data.py .
-COPY docker-init.py .
 
 # 安装Python依赖（使用纯Python驱动）
 RUN pip install --no-cache-dir -e .

@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - FLASK_ENV=production
       - DATABASE_URL=mysql+pymysql://ecommerce:password@mysql:3306/ecommerce
